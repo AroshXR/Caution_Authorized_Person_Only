@@ -1,0 +1,13 @@
+{
+  "name": "wish-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "start": "node tools/serve.mjs"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  }
+}

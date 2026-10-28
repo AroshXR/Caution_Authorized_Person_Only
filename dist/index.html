@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#160f26">
+  <meta name="description" content="A little birthday magic. A candle to light, a wish to make, and a day that's all yours.">
+  <title>A Little Birthday Magic</title>
+  <link rel="icon" href="./spark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="importmap">{"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}</script>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="wordmark" href="./" aria-label="A little celebration home"><span class="brand-spark" aria-hidden="true">✳</span> a little celebration<span class="brand-dot">.</span></a>
+    <div class="header-actions">
+      <button class="sound-button icon-button" id="sound" aria-label="Turn sound on" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m11 5-6 4H2v6h3l6 4V5Z"/><path class="sound-off" d="m17 9 5 6m0-6-5 6"/><path class="sound-on" d="M16 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg></button>
+      <button class="customize-button" id="customize"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><path d="m13 3 4 4M3 17l4-1L17 6a2.8 2.8 0 0 0-4-4L3 12v5Z"/></svg>Make it personal</button>
+    </div>
+  </header>
+
+  <main class="experience">
+    <section class="greeting" aria-labelledby="birthday-title">
+      <p class="eyebrow"><span></span> A LITTLE BIRTHDAY MAGIC</p>
+      <h1 id="birthday-title">Happy<br><em>Birthday<span class="title-dot">.</span></em></h1>
+      <p class="recipient" id="recipient" hidden></p>
+      <p class="intro" id="message">Here's to a day as wonderful as you are.<br>And a little wish that just might come true.</p>
+      <div class="action-area">
+        <button class="primary-button" id="wish" disabled><span class="button-spark" aria-hidden="true">✧</span><span id="wish-label">Preparing your cake</span><span class="button-arrow" aria-hidden="true">↗</span></button>
+        <p class="action-hint" id="action-hint" hidden></p>
+      </div>
+      <p class="celebration-note" id="celebration-note" hidden>May this year bring you the best kind of surprises. ✨</p>
+    </section>
+
+    <section class="cake-scene" aria-label="Interactive birthday cake">
+      <div class="scene-halo" aria-hidden="true"></div>
+      <div class="sky-light" aria-hidden="true"></div>
+      <div class="landing-flash" aria-hidden="true"></div>
+      <button class="text-button skip-intro" id="skip-intro" hidden>Skip intro <span aria-hidden="true">↘</span></button>
+      <span class="orbit-star star-one" aria-hidden="true">✦</span><span class="orbit-star star-two" aria-hidden="true">✧</span><span class="orbit-star star-three" aria-hidden="true">+</span>
+      <div id="scene" class="scene-canvas"></div>
+      <div class="loading" id="loading" role="status"><span class="loading-spark">✧</span><span>Mixing a little magic…</span></div>
+      <div class="scene-caption"><span class="tiny-line"></span><span id="cake-description">CHOCOLATE & A LITTLE STARDUST</span><span class="tiny-line"></span></div>
+      <div class="interaction-hint" id="interaction-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M4 10a9 9 0 0 1 16 0M4 10V5m0 5h5m11 4a9 9 0 0 1-16 0m16 0v5m0-5h-5"/></svg>Drag to explore your cake</div>
+    </section>
+  </main>
+
+  <footer class="experience-footer">
+    <ol class="steps" aria-label="Birthday celebration progress">
+      <li class="active" id="step-one" aria-current="step"><span>01</span> LIGHT IT UP</li>
+      <li id="step-two"><span>02</span> MAKE A WISH</li>
+      <li id="step-three"><span>03</span> CELEBRATE</li>
+    </ol>
+    <div class="scene-controls">
+      <button id="motion" class="text-button" aria-pressed="false"><span id="motion-icon" aria-hidden="true">Ⅱ</span><span id="motion-label">Pause motion</span></button>
+      <span class="control-divider" aria-hidden="true"></span>
+      <button id="replay" class="text-button"><span aria-hidden="true">↻</span> Start again</button>
+    </div>
+  </footer>
+  <div class="screen-grain" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog id="personalize-dialog" aria-labelledby="dialog-title">
+    <form id="personalize-form">
+      <div class="dialog-heading"><span class="eyebrow">THE FINISHING TOUCH</span><button class="icon-button close-dialog" type="button" aria-label="Close customization">×</button></div>
+      <h2 id="dialog-title">Make their day<em> a little brighter.</em></h2>
+      <label for="name">Birthday person's name <span>(optional)</span></label>
+      <input id="name" name="name" maxlength="28" placeholder="Their name" autocomplete="off">
+      <label for="personal-message">Your birthday message</label>
+      <textarea id="personal-message" name="message" maxlength="140" rows="3" placeholder="A little birthday wish…"></textarea>
+      <fieldset><legend>Pick a flavour</legend><div class="flavours">
+        <label class="flavour"><input type="radio" name="flavour" value="chocolate" checked><span class="flavour-dot chocolate"></span>Chocolate</label>
+        <label class="flavour"><input type="radio" name="flavour" value="vanilla"><span class="flavour-dot vanilla"></span>Vanilla</label>
+        <label class="flavour"><input type="radio" name="flavour" value="strawberry"><span class="flavour-dot strawberry"></span>Strawberry</label>
+      </div></fieldset>
+      <button class="primary-button apply-button" type="submit">Add a little magic<span aria-hidden="true">↗</span></button>
+      <p class="dialog-footnote">A cake, a candle, a birthday wish. That's all it takes.</p>
+    </form>
+  </dialog>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

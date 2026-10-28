@@ -1,0 +1,8 @@
+node_modules/
+.npm-cache/
+tools/python/
+tools/reference.mp4
+tools/reference.html
+tools/qa/
+*.tar.gz
+*.tgz
